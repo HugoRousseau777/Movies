@@ -26,6 +26,7 @@ import { TasksModule } from './tasks/tasks.module';
         database: configService.get('DB_NAME'),
         entities: [join(process.cwd(), 'dist/**/*.entity.js')],
         synchronize: true, 
+        autoLoadEntities: true
       }),
     }),
     CustomersModule,

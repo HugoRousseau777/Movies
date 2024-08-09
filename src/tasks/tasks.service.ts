@@ -7,9 +7,10 @@ import { Task } from './entities/task.entity';
 
 @Injectable()
 export class TasksService {
+  static create: any;
 
   constructor(
-    @InjectRepository(Task)
+    @InjectRepository(Task)  
     private readonly tasksRepository: Repository<Task>
   ) {
      
@@ -30,15 +31,15 @@ export class TasksService {
       where: { task_id }
     });
   }
-  async update(rental_id: number, updateTaskDto: UpdateTaskDto) {
-    const rental = await this.findOne(rental_id);
-    if(!rental){
+  async update(task_id: number, updateTaskDto: UpdateTaskDto) {
+    const task = await this.findOne(task_id);
+    if(!task){
       throw new NotFoundException();
     }
 
-    Object.assign(rental, updateTaskDto);
+    Object.assign(task, updateTaskDto);
 
-    return await this.tasksRepository.save(rental);
+    return await this.tasksRepository.save(task);
   }
 
   async remove(task_id: number) {

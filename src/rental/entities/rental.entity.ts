@@ -1,12 +1,13 @@
 import { Customer } from "src/customers/entities/customer.entity";
 import { Film } from "src/films/entities/film.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Task } from "src/tasks/entities/task.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'rentals'})
 export class Rental {
 
     @PrimaryGeneratedColumn()
-    rental_id: number;
+    rental_id: number
 
     @Column()
     rental_date: Date
@@ -21,5 +22,10 @@ export class Rental {
 
     @Column()
     return_date: Date
+
+    @OneToMany(()=> Task, (task) => task.rental)
+    rental: Rental
+
+ 
 
 }
